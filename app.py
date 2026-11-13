@@ -98,7 +98,15 @@ def cargar():
     # Fabricamos las columnas que el Dashboard necesita para pintar los gráficos
     df['anio'] = df['fecha'].dt.year
     df['mes'] = df['fecha'].dt.month
-    df['dia_semana'] = df['fecha'].dt.day_name(locale='es_ES').str.capitalize()
+    df['dia_semana'] = df['fecha'].dt.dayofweek.map({
+    0: 'Lunes',
+    1: 'Martes',
+    2: 'Miércoles',
+    3: 'Jueves',
+    4: 'Viernes',
+    5: 'Sábado',
+    6: 'Domingo'
+})
     
     # Tipo de día
     es_domingo = df['fecha'].dt.dayofweek == 6
